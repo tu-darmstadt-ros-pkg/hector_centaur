@@ -20,7 +20,6 @@
   </include>
   -->
 
-  <include file="$(find hector_centaur_gazebo)/launch/spawn_centaur_default.launch"/>
+  <include file="$(find hector_centaur_gazebo)/launch/spawn_centaur_default_with_controllers.launch"/>
   
-  <include file="$(find hector_centaur_gazebo)/launch/centaur_default_controllers.launch"/>  
 </launch>

@@ -35,9 +35,9 @@
           -J rear_flipper_joint 0.75
           -x 0
           -y 0
-          -z 0.7876
+          -z 0.4
           -R 0
-          -P 0.20896
+          -P 0.0
           -Y 0"
     respawn="false" output="screen" />
 
@@ -48,6 +48,11 @@
   </node>
   
   <node name="relay_servo_joint_states" pkg="topic_tools" type="relay" args="/joint_states /thor_mang/joint_states" />
+  
+  <node name="gazebo_laser_intensity_modifier_node" pkg="vigir_lidar_intensity_modifier" type="laser_intensity_modifier_node" output="screen">
+    <remap from="scan" to="/laser1/scan_no_intensities_from_gazebo"/>
+    <remap from="scan_out" to="/laser1/scan"/>
+  </node>
   
   <node name="relay_head_image" pkg="topic_tools" type="relay" args="/head_cam/image_raw /camera/image_raw" />
   <node name="relay_head_camera_info" pkg="topic_tools" type="relay" args="/head_cam/camera_info /camera/camera_info" />  
