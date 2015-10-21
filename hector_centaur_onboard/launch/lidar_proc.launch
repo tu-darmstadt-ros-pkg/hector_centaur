@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <arg name="lidar_filter_target_frame"   default="odom"/>
+
+  <include file="$(find vigir_lidar_proc_launch)/launch/lidar_proc.launch">
+    <arg name="node_name_prefix" value="nav_lidar_" />
+    <arg name="scan_topic" value="/laser1/scan" />
+    <arg name="scan_cloud_topic" value="/scan_cloud" />
+    <arg name="scan_cloud_filtered_topic" value="/scan_cloud_filtered" />
+
+    <arg name="target_frame" value="$(arg lidar_filter_target_frame)" />
+    <arg name="use_high_fidelity_projection" value="false" />
+  </include>
+  
+  <rosparam file="$(find hector_centaur_onboard)/config/self_filter_centaur_default.yaml" command="load" ns="nav_lidar_self_filter_lidar" />
+  
+<!--
+  <include file="$(find vigir_lidar_proc_launch)/launch/lidar_proc.launch">
+    <arg name="node_name_prefix" value="rear_" />
+    <arg name="scan_topic" value="/rear_spinning_lidar/scan" />
+    <arg name="scan_cloud_topic" value="/scan_cloud" />
+    <arg name="scan_cloud_filtered_topic" value="/scan_cloud_filtered" />
+
+    <arg name="target_frame" value="$(arg lidar_filter_target_frame)" />
+    <arg name="use_high_fidelity_projection" value="true" />
+  </include>
+  
+
+  <rosparam file="$(find vigir_lidar_proc_launch)/config/argo_lidar_self_filter.yaml" command="load" ns="rear_self_filter_lidar" />
+  -->
+  
+</launch>

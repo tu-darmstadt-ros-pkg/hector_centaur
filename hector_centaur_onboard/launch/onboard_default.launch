@@ -50,6 +50,7 @@
     
     <include file="$(find hector_launch)/launch/mapping.launch">        
       <arg name="pub_map_odom_transform" value="$(arg use_ground_truth_for_tf)"/>
+      <arg name="scan_topic" value="scan_trash_mapped_away"/>
     </include>       
   </group>
   
