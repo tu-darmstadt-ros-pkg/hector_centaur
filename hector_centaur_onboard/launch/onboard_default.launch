@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <!-- 
+  Mission name is set in separate launch file, so it can be included
+  in different places
+  -->
+  <include file="$(find hector_launch)/launch/mission_name.launch" />
+  
+  <arg name="use_smach" default="true"/>
+  <arg name="use_ground_truth_for_tf" default="true"/>
+  
+  <group unless="$(optenv REALROBOT 0)">
+    
+    <!--      
+    <include file="$(find hector_launch)/launch/simulator.launch">
+    <arg name="use_ground_truth_for_tf" value="$(arg use_ground_truth_for_tf)"/>
+    </include>
+    -->
+    
+    <!-- publish fake state from ground_truth... -->
+    <group if="$(arg use_ground_truth_for_tf)">
+      <node pkg="topic_tools" type="relay" name="ground_truth_state_publisher" args="ground_truth/state state" />
+      <node pkg="message_to_tf" type="message_to_tf" name="ground_truth_to_tf" output="screen">
+        <param name="frame_id" value="/world" />
+        <param name="odometry_topic" value="ground_truth/state" />
+        <param name="tf_prefix" value="" />
+      </node>
+      
+      <!-- use hector_mapping/pub_map_odom_transform for map->nav transformation -->
+      <param name="hector_mapping/pub_map_odom_transform" value="true"/>
+      <param name="hector_mapping/odom_frame" value="nav"/>
+      <node pkg="tf" type="static_transform_publisher" name="nav_world_broadcaster" args="0 0 0.25 0 0 0 nav world 100" />
+    </group>
+    
+    <!-- ...or start monstertruck_pose estimation -->
+    <group unless="$(arg use_ground_truth_for_tf)">
+      <include file="$(find monstertruck_pose_estimation)/launch/monstertruck_pose_estimation.launch" />
+      <node pkg="message_to_tf" type="message_to_tf" name="ground_truth_to_tf" output="screen">
+        <param name="frame_id" value="/world" />
+        <param name="odometry_topic" value="ground_truth/state" />
+        <param name="tf_prefix" value="ground_truth" />
+      </node>
+      
+      <!-- publish static map->nav transformation -->
+      <param name="hector_mapping/pub_map_odom_transform" value="false"/>
+      <node pkg="tf" type="static_transform_publisher" name="map_nav_broadcaster" args="0 0 0 0 0 0 map nav 100" />
+    </group>
+    
+    <include file="$(find hector_launch)/launch/mapping.launch">        
+      <arg name="pub_map_odom_transform" value="$(arg use_ground_truth_for_tf)"/>
+    </include>       
+  </group>
+  
+  <!--<include file="$(find hector_mapping_known_poses)/launch/mapping_filter_veil_wall.launch" />-->
+  
+  <include file="$(find hector_launch)/launch/3d_mapping.launch" />
+  <include file="$(find hector_launch)/launch/navigation.launch" />
+  
+  <include file="$(find hector_launch)/launch/worldmodel.launch" />
+  <include file="$(find hector_thermal_self_filter)/launch/thermal_self_filter_hector_ugv.launch" />
+  
+  <group if="$(arg use_smach)">
+    <include file="$(find hector_launch)/launch/behavior.launch"/>
+  </group>
+  <group unless="$(arg use_smach)">
+    <include file="$(find hector_launch)/launch/sar.launch" />
+  </group>
+  <include file="$(find hector_launch)/launch/taskallocation.launch" />
+  
+  <include file="$(find hector_octomap_server)/launch/octomap_server_hector_ugv.launch" />
+</launch>
+

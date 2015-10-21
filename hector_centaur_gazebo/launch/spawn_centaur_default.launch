@@ -31,6 +31,8 @@
           -J waist_lidar 0
           -J waist_pan 0
           -J waist_tilt 0
+          -J front_flipper_joint -0.75
+          -J rear_flipper_joint 0.75
           -x 0
           -y 0
           -z 0.7876
@@ -44,6 +46,8 @@
     <param name="publish_frequency" type="double" value="50.0" />
     <remap from="joint_states" to="/thor_mang/joint_states" />
   </node>
+  
+  <node name="relay_servo_joint_states" pkg="topic_tools" type="relay" args="/joint_states /thor_mang/joint_states" />
   
   <node name="relay_head_image" pkg="topic_tools" type="relay" args="/head_cam/image_raw /camera/image_raw" />
   <node name="relay_head_camera_info" pkg="topic_tools" type="relay" args="/head_cam/camera_info /camera/camera_info" />  
