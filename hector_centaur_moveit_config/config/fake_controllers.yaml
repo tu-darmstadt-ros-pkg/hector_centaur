@@ -1,0 +1,127 @@
+controller_list:
+  - name: fake_head_group_controller
+    joints:
+      - head_pan
+      - head_tilt
+  - name: fake_torso_group_controller
+    joints:
+      - waist_pan
+      - waist_tilt
+  - name: fake_l_arm_group_controller
+    joints:
+      - l_shoulder_pitch
+      - l_shoulder_roll
+      - l_shoulder_yaw
+      - l_elbow
+      - l_wrist_yaw1
+      - l_wrist_roll
+      - l_wrist_yaw2
+  - name: fake_r_arm_group_controller
+    joints:
+      - r_shoulder_pitch
+      - r_shoulder_roll
+      - r_shoulder_yaw
+      - r_elbow
+      - r_wrist_yaw1
+      - r_wrist_roll
+      - r_wrist_yaw2
+  - name: fake_both_arms_group_controller
+    joints:
+      - l_shoulder_pitch
+      - l_shoulder_roll
+      - l_shoulder_yaw
+      - l_elbow
+      - l_wrist_yaw1
+      - l_wrist_roll
+      - l_wrist_yaw2
+      - r_shoulder_pitch
+      - r_shoulder_roll
+      - r_shoulder_yaw
+      - r_elbow
+      - r_wrist_yaw1
+      - r_wrist_roll
+      - r_wrist_yaw2
+  - name: fake_both_arms_with_torso_group_controller
+    joints:
+      - waist_pan
+      - waist_tilt
+      - l_shoulder_pitch
+      - l_shoulder_roll
+      - l_shoulder_yaw
+      - l_elbow
+      - l_wrist_yaw1
+      - l_wrist_roll
+      - l_wrist_yaw2
+      - r_shoulder_pitch
+      - r_shoulder_roll
+      - r_shoulder_yaw
+      - r_elbow
+      - r_wrist_yaw1
+      - r_wrist_roll
+      - r_wrist_yaw2
+  - name: fake_l_arm_with_torso_group_controller
+    joints:
+      - waist_pan
+      - waist_tilt
+      - l_shoulder_pitch
+      - l_shoulder_roll
+      - l_shoulder_yaw
+      - l_elbow
+      - l_wrist_yaw1
+      - l_wrist_roll
+      - l_wrist_yaw2
+  - name: fake_r_arm_with_torso_group_controller
+    joints:
+      - waist_pan
+      - waist_tilt
+      - r_shoulder_pitch
+      - r_shoulder_roll
+      - r_shoulder_yaw
+      - r_elbow
+      - r_wrist_yaw1
+      - r_wrist_roll
+      - r_wrist_yaw2
+  - name: fake_whole_body_group_controller
+    joints:
+      - waist_pan
+      - waist_tilt
+      - head_pan
+      - head_tilt
+      - l_shoulder_pitch
+      - l_shoulder_roll
+      - l_shoulder_yaw
+      - l_elbow
+      - l_wrist_yaw1
+      - l_wrist_roll
+      - l_wrist_yaw2
+      - r_shoulder_pitch
+      - r_shoulder_roll
+      - r_shoulder_yaw
+      - r_elbow
+      - r_wrist_yaw1
+      - r_wrist_roll
+      - r_wrist_yaw2
+  - name: fake_all_appendages_group_controller
+    joints:
+      - l_shoulder_pitch
+      - l_shoulder_roll
+      - l_shoulder_yaw
+      - l_elbow
+      - l_wrist_yaw1
+      - l_wrist_roll
+      - l_wrist_yaw2
+      - r_shoulder_pitch
+      - r_shoulder_roll
+      - r_shoulder_yaw
+      - r_elbow
+      - r_wrist_yaw1
+      - r_wrist_roll
+      - r_wrist_yaw2
+  - name: fake_l_hand_group_controller
+    joints:
+      - l_f0_j0
+      - l_f1_j0
+  - name: fake_r_hand_group_controller
+    joints:
+      - r_f0_j0
+      - r_f1_j0

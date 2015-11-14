@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: hector_centaur_description
+    relative_path: robots/centaur_default.urdf.xacro
+  SRDF:
+    relative_path: config/hector_centaur.srdf
+  CONFIG:
+    generated_timestamp: 1447532823
