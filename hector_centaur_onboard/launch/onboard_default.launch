@@ -22,16 +22,24 @@
     <!-- publish fake state from ground_truth... -->
     <group if="$(arg use_ground_truth_for_tf)">
       <node pkg="topic_tools" type="relay" name="ground_truth_state_publisher" args="ground_truth/state state" />
+    
       <node pkg="message_to_tf" type="message_to_tf" name="ground_truth_to_tf" output="screen">
-        <param name="frame_id" value="/world" />
+        <param name="frame_id" value="map" />
         <param name="odometry_topic" value="ground_truth/state" />
-        <param name="tf_prefix" value="" />
       </node>
-      
+
       <!-- use hector_mapping/pub_map_odom_transform for map->nav transformation -->
-      <param name="hector_mapping/pub_map_odom_transform" value="true"/>
-      <param name="hector_mapping/odom_frame" value="nav"/>
-      <node pkg="tf" type="static_transform_publisher" name="nav_world_broadcaster" args="0 0 0.25 0 0 0 nav world 100" />
+      <param name="hector_mapping/pub_map_odom_transform" value="false"/>
+      <!--<param name="hector_mapping/odom_frame" value="odom"/>-->
+    
+      <node pkg="tf" type="static_transform_publisher" name="static_world_to_map_publisher" args="0 0 0 0 0 0 /world /map 100"/>
+      
+      <include file="$(find hector_launch)/launch/mapping.launch">
+        <arg name="pub_map_odom_transform" value="false"/>
+        <arg name="use_tf_pose_start_estimate" value="true"/>        
+        <arg name="odom_frame" value="base_stabilized"/>
+        <arg name="scan_topic" value="scan_trash_mapped_away"/>
+      </include>  
     </group>
     
     <!-- ...or start monstertruck_pose estimation -->
@@ -48,16 +56,21 @@
       <node pkg="tf" type="static_transform_publisher" name="map_nav_broadcaster" args="0 0 0 0 0 0 map nav 100" />
     </group>
     
-    <include file="$(find hector_launch)/launch/mapping.launch">        
+<!--    <include file="$(find hector_launch)/launch/mapping.launch">        
       <arg name="pub_map_odom_transform" value="$(arg use_ground_truth_for_tf)"/>
       <arg name="scan_topic" value="scan_trash_mapped_away"/>
-    </include>       
+    </include> -->      
   </group>
   
   <!--<include file="$(find hector_mapping_known_poses)/launch/mapping_filter_veil_wall.launch" />-->
   
   <include file="$(find hector_launch)/launch/3d_mapping.launch" />
-  <include file="$(find hector_launch)/launch/navigation.launch" />
+  
+    <include file="$(find hector_move_base)/launch/hector_move_base_bertl.launch">
+      <arg name="use_alternate_planner" value="false" />  
+    </include>
+    
+    <include file="$(find vehicle_controller)/launch/bertl_controller.launch" />
   
   <include file="$(find hector_launch)/launch/worldmodel.launch" />
   <include file="$(find hector_thermal_self_filter)/launch/thermal_self_filter_hector_ugv.launch" />
