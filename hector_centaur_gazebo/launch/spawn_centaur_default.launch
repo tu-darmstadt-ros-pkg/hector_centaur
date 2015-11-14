@@ -14,16 +14,16 @@
           -model robot_description
           -J head_pan 0
           -J head_tilt 0
-          -J l_elbow -2.4
-          -J l_shoulder_pitch 0.75316509
-          -J l_shoulder_roll -0.275504491
+          -J l_elbow -2.0
+          -J l_shoulder_pitch 0.0
+          -J l_shoulder_roll -0.0
           -J l_shoulder_yaw 0.0211927
           -J l_wrist_roll 0
           -J l_wrist_yaw1 -0.249898588
           -J l_wrist_yaw2 0.816801445
-          -J r_elbow 2.4
-          -J r_shoulder_pitch -0.75318944
-          -J r_shoulder_roll 0.275497647
+          -J r_elbow 2.3
+          -J r_shoulder_pitch -0.0
+          -J r_shoulder_roll 0.0
           -J r_shoulder_yaw -0.02119781
           -J r_wrist_roll 0
           -J r_wrist_yaw1 0.249900152

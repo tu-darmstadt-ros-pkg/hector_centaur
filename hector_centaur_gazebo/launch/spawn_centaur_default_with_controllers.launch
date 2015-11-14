@@ -6,4 +6,17 @@
   
   <include file="$(find hector_centaur_gazebo)/launch/centaur_default_controllers.launch"/>  
   
+  
+  <!-- Special treatment for heat_detection in simulation -->
+  <node pkg="rostopic" type="rostopic" name="rostopic_thermal_cam_publisher" output="screen" args="pub /thermal/mapping thermaleye_msgs/Mapping 10 25 -l" />
+  <node pkg="dynamic_reconfigure" type="dynparam" name="dynparam_thermal_cam_loader" output="screen" args="load heat_detection $(find hector_heat_detection)/cfg/heat_detection_gazebo.yaml" />
+
+  <!-- Special treatment for openni_camera in simulation -->
+  <group ns="openni">
+     <node pkg="nodelet" type="nodelet" name="openni_nodelet_manager" args="manager" output="screen" />
+  </group>
+  
+  <!-- relay topic for barrelDetection Siumlation -->
+  <node name="relay_camera_info" pkg="topic_tools" type="relay" args="/openni/camera_info /openni/rgb/camera_info" respawn="true"/>
+  
 </launch>
