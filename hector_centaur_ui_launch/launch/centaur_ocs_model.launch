@@ -14,6 +14,9 @@
 
   <node pkg="vigir_ocs_robot_model" type="moveit_ocs_model_node" name="moveit_ocs_model_node" respawn="true" >
     <rosparam command="load" file="$(find hector_centaur_moveit_config)/config/kinematics.yaml"/>
+    <remap from="/atlas/joint_states" to="/thor_mang/joint_states" />
+    <remap from="/flor/controller/atlas_pose" to="/ground_truth_to_tf/pose" />
+    <remap from="/flor/ghost/set_root_pose" to="/trash_inc_set_pose" />
   </node>
 
 </launch>

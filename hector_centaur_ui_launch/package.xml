@@ -45,11 +45,19 @@
   <build_depend>vigir_ocs_map_view</build_depend>
   <build_depend>vigir_ocs_main_camera_view</build_depend>
   <build_depend>vigir_ocs_ghost_control_widget</build_depend>
-  <build_depend>vigir_ocs_global_hotkey</build_depend>
-  <build_depend>vigir_ocs_back_joint_limit</build_depend>
-  <build_depend>vigir_rqt_position_mode</build_depend>
+  <!--<build_depend>vigir_ocs_global_hotkey</build_depend>-->
+  <!--<build_depend>vigir_ocs_back_joint_limit</build_depend>-->
+  <!--<build_depend>vigir_rqt_position_mode</build_depend>-->
   <build_depend>vigir_ocs_interactive_marker_server_nodelet</build_depend>
-
+  
+  <run_depend>vigir_ocs_main_view</run_depend>
+  <run_depend>vigir_ocs_map_view</run_depend>
+  <run_depend>vigir_ocs_main_camera_view</run_depend>
+  <run_depend>vigir_ocs_ghost_control_widget</run_depend>
+  <!--<run_depend>vigir_ocs_global_hotkey</run_depend>-->
+  <!--<run_depend>vigir_ocs_back_joint_limit</run_depend>-->
+  <!--<run_depend>vigir_rqt_position_mode</run_depend>-->
+  <run_depend>vigir_ocs_interactive_marker_server_nodelet</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

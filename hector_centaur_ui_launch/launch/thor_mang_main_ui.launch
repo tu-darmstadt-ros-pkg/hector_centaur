@@ -37,7 +37,7 @@
 
   <!--<node name="controller_mode_ui"             pkg="vigir_rqt_control_mode"             type="control_mode_qt"          respawn="true"/>-->
   <rosparam file="$(find vigir_rqt_joint_control)/config/displayed_groups_thor.yaml" ns="/vigir_rqt_joint_control"/>
-  <node name="$(anon vigir_rqt_joint_control)"        pkg="vigir_rqt_joint_control"            type="joint_control_qt"       respawn="true"/> 
+<!--  <node name="$(anon vigir_rqt_joint_control)"        pkg="vigir_rqt_joint_control"            type="joint_control_qt"       respawn="true"/> -->
 
   <node name="$(anon vigir_ocs_glance_hub)"           pkg="vigir_ocs_glance_hub"               type="glance_hub"	          respawn="true"/>   
   

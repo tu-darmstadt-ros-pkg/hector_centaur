@@ -4,7 +4,16 @@ project(hector_centaur_ui_launch)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+vigir_ocs_main_view
+vigir_ocs_map_view
+vigir_ocs_main_camera_view
+vigir_ocs_ghost_control_widget
+#vigir_ocs_global_hotkey
+#vigir_ocs_back_joint_limit
+#vigir_rqt_position_mode
+vigir_ocs_interactive_marker_server_nodelet
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
