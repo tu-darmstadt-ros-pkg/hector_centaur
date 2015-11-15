@@ -42,9 +42,12 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>hector_centaur_gazebo</build_depend>
   <build_depend>hector_centaur_onboard</build_depend>
+  <build_depend>vigir_lidar_octomap_updater</build_depend>
+  <build_depend>vigir_move_group</build_depend>
   <run_depend>hector_centaur_gazebo</run_depend>
   <run_depend>hector_centaur_onboard</run_depend>
-
+  <run_depend>vigir_lidar_octomap_updater</run_depend>
+  <run_depend>vigir_move_group</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

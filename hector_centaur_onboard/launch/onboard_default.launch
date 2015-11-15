@@ -84,5 +84,19 @@
   <include file="$(find hector_launch)/launch/taskallocation.launch" />
   
   <include file="$(find hector_octomap_server)/launch/octomap_server_hector_ugv.launch" />
+  
+  <include file="$(find hector_centaur_onboard)/launch/lidar_proc.launch" />
+  
+  
+  <!--
+  ******************************************************************************************
+  Manipulation stuff below
+  ******************************************************************************************
+  -->
+  
+  <include file="$(find hector_centaur_moveit_config)/launch/move_group.launch" />
+  
+  <node name="set_head_lidar_velocity" pkg="rostopic" type="rostopic" output="screen" args="pub -r 1 /thor_mang/head_lidar_controller/command std_msgs/Float64 'data: 0.5'"/>
+  
 </launch>
 

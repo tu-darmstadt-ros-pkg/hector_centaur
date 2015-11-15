@@ -8,7 +8,13 @@
   
    <include file="$(find hector_centaur_gazebo)/launch/spawn_centaur_default_with_controllers.launch"/>
   
-   <include file="$(find hector_centaur_onboard)/launch/lidar_proc.launch"/>
    <include file="$(find hector_centaur_onboard)/launch/onboard_default.launch"/>
+   
+   
+   <!--
+   Moved to onboard launch fileb
+   <include file="$(find hector_centaur_onboard)/launch/lidar_proc.launch"/>
+   -->
+   
     
 </launch>

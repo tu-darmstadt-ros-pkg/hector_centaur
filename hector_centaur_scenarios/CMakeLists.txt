@@ -7,6 +7,8 @@ project(hector_centaur_scenarios)
 find_package(catkin REQUIRED COMPONENTS
   hector_centaur_gazebo
   hector_centaur_onboard
+  vigir_lidar_octomap_updater
+  vigir_move_group
 )
 
 ## System dependencies are found with CMake's conventions
