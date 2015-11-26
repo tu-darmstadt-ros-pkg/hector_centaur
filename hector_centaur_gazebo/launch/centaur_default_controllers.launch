@@ -13,7 +13,9 @@
             left_arm_traj_controller
             right_arm_traj_controller
             torso_traj_controller
-            head_traj_controller"/>
+            head_traj_controller
+            left_hand_traj_controller
+            right_hand_traj_controller"/>
 
     <!-- convert joint states to TF transforms for rviz, etc -->
     <!--
