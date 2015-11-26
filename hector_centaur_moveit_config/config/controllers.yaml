@@ -41,3 +41,18 @@ controller_list:
       - r_wrist_roll
       - r_wrist_yaw2
       
+ - name: /thor_mang/left_hand_traj_controller
+   action_ns: follow_joint_trajectory
+   type: FollowJointTrajectory
+   default: true
+   joints:
+      - l_f0_j0
+      - l_f1_j0
+      
+ - name: /thor_mang/right_hand_traj_controller
+   action_ns: follow_joint_trajectory
+   type: FollowJointTrajectory
+   default: true
+   joints:
+      - r_f0_j0
+      - r_f1_j0      
