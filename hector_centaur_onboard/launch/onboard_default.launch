@@ -135,5 +135,46 @@
     <remap from="get_plan_cartesian" to="/plan_for_cartesian_waypoint_motion" />
   </node>
   
+  
+  <!--
+  ******************************************************************************************
+  Grasping stuff below
+  ******************************************************************************************
+  -->
+  
+  <rosparam file="$(find vigir_template_library)/object_templates/object_templates.xml" ns="ot_library"/>
+  <rosparam command="load" file="$(find hector_centaur_ui_launch)/config/thor_mang_hand_parameters.yaml" />
+  
+  <!--<include file="$(find thor_mang_onboard_launch)/launch/hands/$(optenv THOR_ROBOT_TYPE thor_mang)_manipulation_controllers.launch"/>-->
+
+  <rosparam file="$(find vigir_template_library)/robot_poses/thor_mang_stand_poses.xml" ns="stand_poses_library"/>
+
+  <rosparam file="$(find vigir_template_library)/grasp_templates/$(optenv RIGHT_HAND_TYPE r_vt_hand)_grasp_library.xml" ns="r_hand_library"/>
+  <rosparam file = "$(find vigir_template_library)/grasp_templates/$(optenv LEFT_HAND_TYPE l_vt_hand)_grasp_library.xml" ns="l_hand_library"/>
+
+  <include  file = "$(find vigir_manipulation_controller)/launch/$(optenv RIGHT_HAND_TYPE r_vt_hand)_manipulation_control.launch" />
+  <include  file = "$(find vigir_manipulation_controller)/launch/$(optenv LEFT_HAND_TYPE  l_vt_hand)_manipulation_control.launch"/>
+  
+  
+  <!--
+  ******************************************************************************************
+  Worldmodel stuff below
+  ******************************************************************************************
+  -->
+    <!--  <node pkg="vigir_worldmodel_main" type="worldmodel_main" name="worldmodel_main" output="screen" launch-prefix="gdb -ex run iiargs">-->
+  <node pkg="vigir_worldmodel_server" type="worldmodel_server_node" name="worldmodel_main" output="screen" respawn="true">
+    <!--<remap from="scan_cloud" to="scan_cloud_filtered"/>-->
+    <param name="aggregator_frames" value="/world /base_link" />
+    <param name="root_frame" value="/world" />
+    
+    <!--Will only start worldmodel when tf transforms between these and root are available-->
+    <param name="required_frames" value="/l_hand /r_hand" />
+    
+    <param name="octomap_save_folder" value="$(find vigir_worldmodel_server)/maps" />
+    <param name="use_external_octomap" value="true" />
+    <remap from="~/octomap_external_update" to="/move_group/octomap"/>
+    <!--<remap from="syscommand" to="/flor/worldmodel/syscommand" /> -->
+  </node>
+  
 </launch>
 

@@ -55,7 +55,7 @@
   -->
   
   <!-- =============  Also run the status widgets on the main UI screen ========= -->
-  <include file="$(find vigir_rqt_position_mode)/launch/thor_mang_hands_positions.launch" />
+  <include file="$(find vigir_rqt_position_mode)/launch/centaur_hands_positions.launch" />
 
   <!--<node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" args="-d $(find thor_mang_ui_launch)/rviz/rviz_ocs_default.rviz"  />--> <!--  output="screen" launch-prefix="xterm -e" / -->
 
