@@ -32,7 +32,7 @@
           -J waist_pan 0
           -J waist_tilt 0
           -J front_flipper_joint -0.75
-          -J rear_flipper_joint 0.95
+          -J rear_flipper_joint 1.38
           -x 0
           -y 0
           -z 0.4
