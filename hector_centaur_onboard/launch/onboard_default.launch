@@ -173,8 +173,60 @@
     <param name="octomap_save_folder" value="$(find vigir_worldmodel_server)/maps" />
     <param name="use_external_octomap" value="true" />
     <remap from="~/octomap_external_update" to="/move_group/octomap"/>
+    
+    <remap from="scan_cloud" to="/3d_cloud"/>
+    <remap from="scan_cloud_filtered" to="/3d_cloud_filtered"/>
     <!--<remap from="syscommand" to="/flor/worldmodel/syscommand" /> -->
   </node>
+  
+  <node pkg="vigir_filtered_localized_scan_utils" type="scan_to_clouds_pub_node" name="scan_to_clouds_pub_node" output="screen">
+    <remap from="~/scan" to="/move_group/scan_filtered_localized"/>
+    <remap from="~/cloud_out" to="/3d_cloud"/>
+    <remap from="~/cloud_self_filtered_out" to="/3d_cloud_filtered"/>
+  </node>
+  
+  
+  <!--
+  ******************************************************************************************
+  Worldmodel stuff below
+  ******************************************************************************************
+  -->
+  <node pkg="hector_mapping" type="hector_mapping" name="hector_height_mapping" output="screen">
+    <param name="scan_topic" value="laser1/scan" />
+    <param name="base_frame" value="base_stabilized" />
+    <param name="odom_frame" value="nav" />
+    
+    <param name="output_timing" value="false"/>
+    <param name="advertise_map_service" value="true"/>
+    <param name="use_tf_scan_transformation" value="true"/>
+    <param name="use_tf_pose_start_estimate" value="true"/>
+    <param name="pub_map_odom_transform" value="false"/>
+    <param name="map_with_known_poses" value="true"/>
+
+    <param name="map_pub_period" value="5.0"/>
+    <param name="update_factor_free" value="0.45"/>
+    <param name="update_factor_occupied" value="0.65"/>
+    
+     
+    
+    <param name="map_update_distance_thresh" value="0.0"/>
+    <param name="map_update_angle_thresh" value="0.0"/>
+    
+    <param name="map_resolution" value="0.05"/>
+    <param name="map_size" value="1024"/>
+    <param name="map_start_x" value="0.5"/>
+    <param name="map_start_y" value="0.5"/>
+    
+    <param name="laser_min_dist" value="0.6" />
+    <param name="laser_max_dist" value="10" />
+    <param name="laser_z_min_value" value="-0.2"/>
+    <param name="laser_z_max_value" value="0.4"/>
+
+    <remap from="map" to="dyn_map" />
+    <remap from="dynamic_map" to="height_map" />
+  </node>
+  
+  
   
 </launch>
 
