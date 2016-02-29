@@ -6,10 +6,11 @@
   Mission name is set in separate launch file, so it can be included
   in different places
   -->
-  <include file="$(find hector_launch)/launch/mission_name.launch" />
+<!--  <include file="$(find hector_launch)/launch/mission_name.launch" />
   
   <arg name="use_smach" default="true"/>
-  <arg name="use_ground_truth_for_tf" default="true"/>
+  -->
+  <arg name="use_ground_truth_for_tf" default="true"/>-->
   
   <group unless="$(optenv REALROBOT 0)">
     
@@ -34,12 +35,12 @@
     
       <node pkg="tf" type="static_transform_publisher" name="static_world_to_map_publisher" args="0 0 0 0 0 0 /world /map 100"/>
       
-      <include file="$(find hector_launch)/launch/mapping.launch">
+<!--      <include file="$(find hector_launch)/launch/mapping.launch">
         <arg name="pub_map_odom_transform" value="false"/>
         <arg name="use_tf_pose_start_estimate" value="true"/>        
         <arg name="odom_frame" value="base_stabilized"/>
         <arg name="scan_topic" value="scan_trash_mapped_away"/>
-      </include>  
+      </include>  -->
     </group>
     
     <!-- ...or start monstertruck_pose estimation -->
@@ -67,15 +68,18 @@
   <!--3D Mapping is elevation + costmapping Costmap used directly below-->
   <!--<include file="$(find hector_launch)/launch/3d_mapping.launch" />-->
   
-    <include file="$(find hector_move_base)/launch/hector_move_base_bertl.launch">
-      <arg name="use_alternate_planner" value="false" />  
-    </include>
+  <node name="relay_mid_lvl_map" pkg="topic_tools" type="relay" args="/worldmodel/grid_map_upper_body_level /map" />
+  
+  <include file="$(find hector_move_base)/launch/hector_move_base_bertl.launch">
+    <arg name="use_alternate_planner" value="false" />  
+  </include>
     
-    <include file="$(find vehicle_controller)/launch/bertl_controller.launch" />
+  <include file="$(find vehicle_controller)/launch/obelix_controller.launch" />
   
-  <include file="$(find hector_launch)/launch/worldmodel.launch" />
-  <include file="$(find hector_thermal_self_filter)/launch/thermal_self_filter_hector_ugv.launch" />
+<!--  <include file="$(find hector_launch)/launch/worldmodel.launch" />-->
   
+<!--  <include file="$(find hector_thermal_self_filter)/launch/thermal_self_filter_hector_ugv.launch" />-->
+<!--  
   <group if="$(arg use_smach)">
     <include file="$(find hector_launch)/launch/behavior.launch"/>
   </group>
@@ -83,9 +87,10 @@
     <include file="$(find hector_launch)/launch/sar.launch" />
   </group>
   <include file="$(find hector_launch)/launch/taskallocation.launch" />
-  
+  -->
+  <!--
   <include file="$(find hector_octomap_server)/launch/octomap_server_hector_ugv.launch" />
-  
+  -->
   <include file="$(find hector_centaur_onboard)/launch/lidar_proc.launch" />
   
   
@@ -142,11 +147,11 @@
   Grasping stuff below
   ******************************************************************************************
   -->
-  
+  <!--
   <rosparam file="$(find vigir_template_library)/object_templates/object_templates.xml" ns="ot_library"/>
   <rosparam command="load" file="$(find hector_centaur_ui_launch)/config/thor_mang_hand_parameters.yaml" />
   
-  <!--<include file="$(find thor_mang_onboard_launch)/launch/hands/$(optenv THOR_ROBOT_TYPE thor_mang)_manipulation_controllers.launch"/>-->
+  <include file="$(find thor_mang_onboard_launch)/launch/hands/$(optenv THOR_ROBOT_TYPE thor_mang)_manipulation_controllers.launch"/>
 
   <rosparam file="$(find vigir_template_library)/robot_poses/thor_mang_stand_poses.xml" ns="stand_poses_library"/>
 
@@ -155,7 +160,7 @@
 
   <include  file = "$(find vigir_manipulation_controller)/launch/$(optenv RIGHT_HAND_TYPE r_vt_hand)_manipulation_control.launch" />
   <include  file = "$(find vigir_manipulation_controller)/launch/$(optenv LEFT_HAND_TYPE  l_vt_hand)_manipulation_control.launch"/>
-  
+  -->
   
   <!--
   ******************************************************************************************
@@ -192,7 +197,7 @@
   Dynamic map and customized costmap setup below
   ******************************************************************************************
   -->
-  <node pkg="hector_mapping" type="hector_mapping" name="hector_height_mapping" output="screen">
+<!--  <node pkg="hector_mapping" type="hector_mapping" name="hector_height_mapping" output="screen">
     <param name="scan_topic" value="laser1/scan" />
     <param name="base_frame" value="base_stabilized" />
     <param name="odom_frame" value="nav" />
@@ -225,9 +230,9 @@
 
     <remap from="map" to="dyn_map" />
     <remap from="dynamic_map" to="height_map" />
-  </node>
+  </node>-->
   
-  <node pkg="hector_costmap" type="hector_costmap" name="hector_costmap" output="screen" respawn="false">
+<!--  <node pkg="hector_costmap" type="hector_costmap" name="hector_costmap" output="screen" respawn="false">
     <param name="cost_map_topic" value="cost_map" />
     <param name="map_frame_id" value="map" />
     <param name="local_transform_frame_id" value="base_footprint" />
@@ -247,7 +252,7 @@
 
     <param name="use_cloud_map" value="false" />
     <param name="cloud_topic" value="openni/depth/points" />
-  </node>
+  </node>-->
   
 </launch>
 
