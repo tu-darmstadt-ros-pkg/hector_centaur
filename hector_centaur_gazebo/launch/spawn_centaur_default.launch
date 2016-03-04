@@ -44,10 +44,10 @@
   <!-- start robot state publisher -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />
-    <remap from="joint_states" to="/thor_mang/joint_states" />
+    <!--<remap from="joint_states" to="/thor_mang/joint_states" />-->
   </node>
   
-  <node name="relay_servo_joint_states" pkg="topic_tools" type="relay" args="/joint_states /thor_mang/joint_states" />
+  <node name="relay_thor_joint_states" pkg="topic_tools" type="relay" args="/thor_mang/joint_states /joint_states" />
   
   <node name="gazebo_laser_intensity_modifier_node" pkg="vigir_lidar_intensity_modifier" type="laser_intensity_modifier_node" output="screen">
     <remap from="scan" to="/laser1/scan_no_intensities_from_gazebo"/>
